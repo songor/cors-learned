@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+  <script src="jquery-3.6.0.min.js"></script>
+</head>
+<body>
+<a href="#" onclick="hello()">Hello</a>
+<script>
+  function hello() {
+    $.getJSON("http://localhost:8080/hello").then(
+        function (result) {
+          console.log(result);
+        })
+  }
+</script>
+</body>
+</html>
