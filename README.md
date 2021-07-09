@@ -11,3 +11,10 @@ XHR（XMLHttpRequest）请求
 **解决方案**
 
 --disable-web-security --user-data-dir="C:/ChromeDevSession"
+
+jsonp
+
+**参考**
+
+[Spring JSON-P with Jackson](https://www.baeldung.com/spring-jackson-jsonp)
+
