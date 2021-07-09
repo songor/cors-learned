@@ -24,10 +24,30 @@
 
   const base_url = "http://localhost:8080";
   describe("CORS", function () {
-    it('use getJSON', function () {
+    it('use getJSON', function (done) {
+      let resp;
       $.getJSON(base_url + "/hello").then(function (result) {
-        expect(result).toEqual("Hello");
+        resp = result;
       });
+      setTimeout(function () {
+        expect(resp).toEqual({"hello": "world"});
+        done();
+      }, 100);
+    });
+
+    it('use jsonp', function (done) {
+      let resp;
+      $.ajax({
+        url: base_url + "/hello",
+        dataType: "jsonp",
+        success: function (result) {
+          resp = result;
+        }
+      });
+      setTimeout(function () {
+        expect(resp).toEqual({"hello": "world"});
+        done();
+      }, 100);
     });
   });
 </script>
