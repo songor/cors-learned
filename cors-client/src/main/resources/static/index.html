@@ -2,18 +2,34 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title></title>
+  <title>CORS</title>
   <script src="jquery-3.6.0.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="jasmine-3.8.0/jasmine.css">
+  <script src="jasmine-3.8.0/jasmine.js"></script>
+  <script src="jasmine-3.8.0/jasmine-html.js"></script>
+  <script src="jasmine-3.8.0/boot.js"></script>
 </head>
 <body>
 <a href="#" onclick="hello()">Hello</a>
+
+<!-- 非 XHR（XMLHttpRequest）请求 -->
+<!--<img src="http://localhost:8080/hello" alt=""/>-->
+
 <script>
   function hello() {
-    $.getJSON("http://localhost:8080/hello").then(
-        function (result) {
-          console.log(result);
-        })
+    $.getJSON("http://localhost:8080/hello").then(function (result) {
+      console.log(result);
+    });
   }
+
+  const base_url = "http://localhost:8080";
+  describe("CORS", function () {
+    it('use getJSON', function () {
+      $.getJSON(base_url + "/hello").then(function (result) {
+        expect(result).toEqual("Hello");
+      });
+    });
+  });
 </script>
 </body>
 </html>
