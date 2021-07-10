@@ -40,6 +40,8 @@
       $.ajax({
         url: base_url + "/hello",
         dataType: "jsonp",
+        jsonp: "callback",
+        cache: false,
         success: function (result) {
           resp = result;
         }
