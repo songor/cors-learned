@@ -14,6 +14,8 @@ XHR（XMLHttpRequest）请求
 
 JSONP
 
+Client -> 被调用方 Apache / Nginx -> 被调用方 Tomcat（Access-Control-Allow-Origin / Access-Control-Allow-Methods / Access-Control-Allow-Headers）
+
 **JSONP**
 
 Type => script
@@ -31,6 +33,12 @@ jQuery36007420675525950529_1625926590684({
 动态创建脚本 => `<script async src="http://localhost:8080/hello?callback=jQuery36007420675525950529_1625926590684&_=1625926590685"></script>`
 
 弊端 => 只支持 GET 请求
+
+**简单请求 / 非简单请求**
+
+OPTIONS 预检命令
+
+OPTIONS 预检命令缓存 Access-Control-Max-Age
 
 **参考**
 

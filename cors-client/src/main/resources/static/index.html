@@ -51,6 +51,23 @@
         done();
       }, 100);
     });
+
+    it('use ajax POST', function (done) {
+      let resp;
+      $.ajax({
+        url: base_url + "/hello",
+        type: "post",
+        contentType: "application/json;charset=UTF-8",
+        data: JSON.stringify({name: "cors"}),
+        success: function (result) {
+          resp = result;
+        }
+      });
+      setTimeout(function () {
+        expect(resp).toEqual({"hello": "cors"});
+        done();
+      }, 100);
+    });
   });
 </script>
 </body>
