@@ -68,6 +68,24 @@
         done();
       }, 100);
     });
+
+    it('use ajax with cookie', function (done) {
+      let resp;
+      $.ajax({
+        url: base_url + "/hello/cookie",
+        type: "get",
+        xhrFields: {
+          withCredentials: true
+        },
+        success: function (result) {
+          resp = result;
+        }
+      });
+      setTimeout(function () {
+        expect(resp).toEqual({"hello": "cors"});
+        done();
+      }, 100);
+    });
   });
 </script>
 </body>

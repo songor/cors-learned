@@ -40,6 +40,12 @@ OPTIONS 预检命令
 
 OPTIONS 预检命令缓存 Access-Control-Max-Age
 
+**Cookie 跨域**
+
+Access-Control-Allow-Origin 不能为 *
+
+Access-Control-Allow-Credentials
+
 **参考**
 
 [Spring JSON-P with Jackson](https://www.baeldung.com/spring-jackson-jsonp)
