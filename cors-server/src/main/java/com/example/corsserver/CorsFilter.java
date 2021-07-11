@@ -22,8 +22,8 @@ public class CorsFilter implements Filter {
   public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse,
       FilterChain filterChain) throws IOException, ServletException {
     HttpServletResponse response = (HttpServletResponse) servletResponse;
-    // response.addHeader("Access-Control-Allow-Origin", "http://localhost:8090");
 
+    // response.addHeader("Access-Control-Allow-Origin", "http://localhost:8090");
     // Cookie 跨域 Access-Control-Allow-Origin 不能为 *
     // response.addHeader("Access-Control-Allow-Origin", "*");
     HttpServletRequest request = (HttpServletRequest) servletRequest;
@@ -34,8 +34,10 @@ public class CorsFilter implements Filter {
 
     // response.addHeader("Access-Control-Allow-Methods", "GET,POST");
     response.addHeader("Access-Control-Allow-Methods", "*");
+
     // response.addHeader("Access-Control-Allow-Headers", "content-type");
     response.addHeader("Access-Control-Allow-Headers", "*");
+
     response.addHeader("Access-Control-Max-Age", "3600");
     response.addHeader("Access-Control-Allow-Credentials", "true");
     filterChain.doFilter(servletRequest, servletResponse);

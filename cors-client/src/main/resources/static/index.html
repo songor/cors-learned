@@ -86,6 +86,24 @@
         done();
       }, 100);
     });
+
+    it('use ajax with custom header', function (done) {
+      let resp;
+      $.ajax({
+        url: base_url + "/hello/header",
+        type: "get",
+        headers: {
+          "X-Custom-Header": "cors"
+        },
+        success: function (result) {
+          resp = result;
+        }
+      });
+      setTimeout(function () {
+        expect(resp).toEqual({"hello": "cors"});
+        done();
+      }, 100);
+    });
   });
 </script>
 </body>
