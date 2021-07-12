@@ -12,7 +12,7 @@ public class CorsServerApplication {
     SpringApplication.run(CorsServerApplication.class, args);
   }
 
-  @Bean
+  //  @Bean
   public FilterRegistrationBean filterRegistrationBean() {
     FilterRegistrationBean filterRegistrationBean = new FilterRegistrationBean();
     filterRegistrationBean.addUrlPatterns("/*");

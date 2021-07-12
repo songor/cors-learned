@@ -17,12 +17,12 @@
 
 <script>
   function hello() {
-    $.getJSON("http://localhost:8080/hello").then(function (result) {
+    $.getJSON("http://corsserver/hello").then(function (result) {
       console.log(result);
     });
   }
 
-  const base_url = "http://localhost:8080";
+  const base_url = "http://corsserver";
   describe("CORS", function () {
     it('use getJSON', function (done) {
       let resp;

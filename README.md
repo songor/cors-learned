@@ -14,7 +14,9 @@ XHR（XMLHttpRequest）请求
 
 JSONP
 
-Client -> 被调用方 Apache / Nginx -> 被调用方 Tomcat（Access-Control-Allow-Origin / Access-Control-Allow-Methods / Access-Control-Allow-Headers）
+Client -> 被调用方 Apache / Nginx -> 被调用方 Tomcat [Filter]（Access-Control-Allow-Origin / Access-Control-Allow-Methods / Access-Control-Allow-Headers）
+
+Client -> 被调用方 Apache / Nginx [.conf] -> 被调用方 Tomcat
 
 **JSONP**
 
@@ -45,6 +47,36 @@ OPTIONS 预检命令缓存 Access-Control-Max-Age
 Access-Control-Allow-Origin 不能为 *
 
 Access-Control-Allow-Credentials
+
+`document.cookie`
+
+**Nginx 配置**
+
+C:\Windows\System32\drivers\etc\hosts 映射域名 127.0.0.1 corsserver
+
+nginx.conf 中添加 include vhost/*.conf;
+
+添加 vhost/corsserver.conf
+
+```nginx
+server {
+    listen 80;
+    server_name corsserver;
+    location / {
+        proxy_pass http://localhost:8080/;
+
+		add_header Access-Control-Allow-Origin $http_origin;
+		add_header Access-Control-Allow-Methods *;
+		add_header Access-Control-Allow-Headers *;
+		add_header Access-Control-Max-Age 3600;
+		add_header Access-Control-Allow-Credentials true;
+
+		if ($request_method = OPTIONS) {
+		    return 200;
+		}
+    }
+}
+```
 
 **参考**
 
