@@ -23,7 +23,7 @@ public class Controller {
   }
 
   @GetMapping("/hello/cookie")
-  public Hello sayHelloCookie(@CookieValue(value = "cookie", required = false) String cookie) {
+  public Hello sayHelloCookie(@CookieValue(value = "cookie") String cookie) {
     System.out.println("---###---");
     return new Hello(cookie);
   }
