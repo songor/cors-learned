@@ -14,7 +14,7 @@ XHR（XMLHttpRequest）请求
 
 JSONP
 
-Client -> 被调用方 Apache / Nginx -> 被调用方 Tomcat [Filter]（Access-Control-Allow-Origin / Access-Control-Allow-Methods / Access-Control-Allow-Headers）
+Client -> （被调用方 Apache / Nginx） -> 被调用方 Tomcat [Filter]（Access-Control-Allow-Origin / Access-Control-Allow-Methods / Access-Control-Allow-Headers）
 
 Client -> 被调用方 Apache / Nginx [.conf] -> 被调用方 Tomcat
 
@@ -76,6 +76,44 @@ server {
 		}
     }
 }
+```
+
+**Apache 配置**
+
+```apache
+Path: conf/httpd.conf
+
+# Virtual hosts
+Include conf/extra/httpd-vhosts.conf
+
+LoadModule proxy_module modules/mod_proxy.so
+LoadModule proxy_http_module modules/mod_proxy_http.so
+
+Define SRVROOT "C:\projects\cors-learned\Apache24"
+
+LoadModule headers_module modules/mod_headers.so
+LoadModule rewrite_module modules/mod_rewrite.so
+```
+
+```apache
+Path: conf/extra/httpd-vhosts.conf
+
+<VirtualHost *:80>
+    ServerName corsserver
+    ErrorLog "logs/corsserver-error.log"
+    CustomLog "logs/corsserver-access.log" common
+	ProxyPass / http://localhost:8080/
+
+	Header always set Access-Control-Allow-Origin "expr=%{req:origin}"
+	Header always set Access-Control-Allow-Headers "expr=%{req:Access-Control-Request-Headers}"
+	Header always set Access-Control-Allow-Methods "*"
+	Header always set Access-Control-Allow-Credentials "true"
+	Header always set Access-Control-Max-Age "3600"
+
+	RewriteEngine On
+	RewriteCond %{REQUEST_METHOD} OPTIONS
+	RewriteRule ^(.*)$ "/" [R=204,L]
+</VirtualHost>
 ```
 
 **参考**
