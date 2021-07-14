@@ -20,6 +20,8 @@ JSONP
 
 <被调用方> Spring 框架 @CrossOrigin
 
+<调用方> 隐藏跨域（反向代理）
+
 **JSONP**
 
 Type => script
@@ -52,7 +54,7 @@ Access-Control-Allow-Credentials
 
 `document.cookie`
 
-**Nginx 配置**
+**<被调用方> Nginx 配置**
 
 C:\Windows\System32\drivers\etc\hosts 映射域名 127.0.0.1 corsserver
 
@@ -117,6 +119,30 @@ Path: conf/extra/httpd-vhosts.conf
 	RewriteRule ^(.*)$ "/" [R=204,L]
 </VirtualHost>
 ```
+
+**<调用方> Nginx 配置**
+
+C:\Windows\System32\drivers\etc\hosts 映射域名 127.0.0.1 corsserver corsclient
+
+添加 vhost/corsclient.conf
+
+```nginx
+server {
+    listen 80;
+    server_name corsclient;
+    location / {
+        proxy_pass http://localhost:8090/;
+    }
+
+	location /ajaxserver {
+        proxy_pass http://localhost:8080/;
+	}
+}
+```
+
+修改 BASE_URL 为相对路径：const base_url = "/ajaxserver";
+
+测试：http://corsclient/
 
 **参考**
 
