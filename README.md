@@ -14,9 +14,11 @@ XHR（XMLHttpRequest）请求
 
 JSONP
 
-Client -> （被调用方 Apache / Nginx） -> 被调用方 Tomcat [Filter]（Access-Control-Allow-Origin / Access-Control-Allow-Methods / Access-Control-Allow-Headers）
+<被调用方> Client -> （被调用方 Apache / Nginx） -> 被调用方 Tomcat [Filter]（Access-Control-Allow-Origin / Access-Control-Allow-Methods / Access-Control-Allow-Headers）
 
-Client -> 被调用方 Apache / Nginx [.conf] -> 被调用方 Tomcat
+<被调用方> Client -> 被调用方 Apache / Nginx [.conf] -> 被调用方 Tomcat
+
+<被调用方> Spring 框架 @CrossOrigin
 
 **JSONP**
 
