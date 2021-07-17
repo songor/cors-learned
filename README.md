@@ -144,6 +144,20 @@ server {
 
 测试：http://corsclient/
 
+**<被调用方> Apache 配置**
+
+```apache
+Path: conf/extra/httpd-vhosts.conf
+
+<VirtualHost *:80>
+    ServerName corsclient
+    ErrorLog "logs/corsclient-error.log"
+    CustomLog "logs/corsclient-access.log" common
+	ProxyPass /ajaxserver http://localhost:8080/
+	ProxyPass / http://localhost:8090/
+</VirtualHost>
+```
+
 **参考**
 
 [Spring JSON-P with Jackson](https://www.baeldung.com/spring-jackson-jsonp)
